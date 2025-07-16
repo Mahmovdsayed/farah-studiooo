@@ -35,14 +35,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { User } from "@/types/user.types";
+import { usePathname } from "next/navigation";
 
 const data = {
-  user: {
-    name: "Farah Mohamed",
-    email: "farahmoahmed10@gmail.com",
-    avatar:
-      "https://i.pinimg.com/1200x/d0/45/0f/d0450fd88661c0189f473753134ed5ca.jpg",
-  },
   navMain: [
     {
       title: "Dashboard",
@@ -51,11 +47,11 @@ const data = {
     },
     {
       title: "Manage Profile",
-      url: "/profile",
+      url: "/dashboard/profile",
       icon: IconUserCircle,
     },
     {
-      title: "Manage Services",
+      title: "Services",
       url: "#",
       icon: IconListDetails,
     },
@@ -152,9 +148,14 @@ const data = {
   ],
 };
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
+  user: User;
+}
+
+export function AppSidebar({ user, ...props }: AppSidebarProps) {
+  const path = usePathname();
   return (
-    <Sidebar collapsible="offcanvas" {...props}>
+    <Sidebar  collapsible="offcanvas" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -167,11 +168,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
+
       <SidebarContent>
         <NavMain items={data.navMain} />
       </SidebarContent>
+
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={user} />
       </SidebarFooter>
     </Sidebar>
   );

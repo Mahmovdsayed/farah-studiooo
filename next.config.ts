@@ -20,7 +20,6 @@ const nextConfig: NextConfig = {
   experimental: {
     scrollRestoration: true,
     optimizeCss: true,
-    cpus: 4,
     optimizeServerReact: true,
     appDocumentPreloading: true,
     serverSourceMaps: false,
@@ -32,7 +31,6 @@ const nextConfig: NextConfig = {
       bodySizeLimit: "10mb",
     },
     turbopackMinify: true,
-    turbopackMemoryLimit: 8192,
     turbopackSourceMaps: process.env.NODE_ENV !== "production",
     turbopackTreeShaking: true,
   },

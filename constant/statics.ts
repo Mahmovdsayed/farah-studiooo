@@ -4,3 +4,5 @@ export const allowedImageTypes = [
   "image/jpg",
   "image/gif",
 ];
+
+export const baseURL = "http://localhost:3000";

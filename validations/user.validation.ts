@@ -3,7 +3,7 @@ import z from "zod";
 
 const userValidation = z.object({
   name: z.string().min(1, { message: "Name is required" }),
- 
+
   username: z
     .string()
     .min(1, { message: "Username is required" })
@@ -12,7 +12,13 @@ const userValidation = z.object({
     .string()
     .max(500, { message: "About must be less than 500 characters" })
     .optional(),
-  birthday: z.string().optional(),
+  birthday: z.preprocess((val) => {
+    if (typeof val === "string" && val) {
+      const date = new Date(val);
+      return isNaN(date.getTime()) ? null : date;
+    }
+    return val;
+  }, z.date().optional()),
   country: z
     .string()
     .max(50, { message: "Country must not exceed 50 characters" })

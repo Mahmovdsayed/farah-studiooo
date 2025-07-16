@@ -8,7 +8,7 @@ type User = {
   password: string;
   avatar?: Image;
   about?: string;
-  birthday?: string;
+  birthday?: Date;
   country?: string;
   city?: string;
   positionName?: string;

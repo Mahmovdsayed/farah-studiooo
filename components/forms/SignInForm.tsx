@@ -13,12 +13,13 @@ import { Label } from "../ui/label";
 
 const SignInForm = () => {
   const router = useRouter();
-  const [state, formAction] = useActionState(
+  const [state, formAction, isPending] = useActionState(
     signInAction,
     signInInitialState as any
   );
 
   useEffect(() => {
+
     if (state.success && state.message) {
       toast.success(state.message, {
         description: "Redirecting to dashboard...",
@@ -40,7 +41,7 @@ const SignInForm = () => {
           action={formAction}
           className="flex mx-auto flex-col gap-2 mt-6 lg:w-9/12 lg:mx-auto"
         >
-          <Label htmlFor="email" className="text-sm text-muted-foreground">
+          <Label htmlFor="email">
             Email
           </Label>
           <Input
@@ -51,7 +52,7 @@ const SignInForm = () => {
             autoComplete="email"
             required
           />
-          <Label htmlFor="password" className="text-sm text-muted-foreground">
+          <Label htmlFor="password">
             Password
           </Label>
           <Input
@@ -77,12 +78,12 @@ const SignInForm = () => {
             </Alert>
           )}
           <Button
-            disabled={state.pending}
+            disabled={isPending}
             type="submit"
             className="w-full mt-4"
             variant="default"
           >
-            <LogIn /> {state.pending ? "Signing in..." : "Sign In"}
+            <LogIn /> {isPending ? "Signing in..." : "Sign In"}
           </Button>
         </form>
       </div>

@@ -10,19 +10,12 @@ import User from "@/models/User.model";
 import { signinValidation } from "@/validations/signIn.validation";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
-type SignInState = {
-  success: boolean;
-  message: string;
-};
+import { ActionState } from "@/types/action.types";
 
-type SignInPayload = {
-  email: string;
-  password: string;
-};
 export async function signInAction(
-  _state: SignInState,
+  _state: ActionState,
   formData: FormData
-): Promise<SignInState> {
+): Promise<ActionState> {
   try {
     // Connect to the database
     await connectToDatabase();
@@ -42,7 +35,7 @@ export async function signInAction(
     }
 
     // Validate the inputs using Zod
-    const result = signinValidation.safeParse({ email, password });
+    const result = await signinValidation.safeParseAsync({ email, password });
     if (!result.success) {
       // Return the first validation error message if any
       return errResponse(result.error.issues[0]?.message || "Invalid input");

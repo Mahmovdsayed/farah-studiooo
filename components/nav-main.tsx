@@ -11,7 +11,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export function NavMain({
   items,
@@ -23,6 +23,7 @@ export function NavMain({
   }[];
 }) {
   const path = usePathname();
+  const router = useRouter();
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Main Navigation</SidebarGroupLabel>
@@ -31,6 +32,7 @@ export function NavMain({
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton
+                onClick={() => router.push(item.url)}
                 isActive={path === item.url ? true : false}
                 tooltip={item.title}
               >

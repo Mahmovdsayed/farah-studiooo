@@ -81,7 +81,7 @@ const uploadImageToCloudinary = async (image: File, folderName: string) => {
       use_filename: true,
       unique_filename: false,
       quality: "100",
-      format: "webp",
+      format: "jpg",
     }
   );
 
@@ -122,7 +122,7 @@ const uploadBannerToCloudinary = async (image: File, folderName: string) => {
       use_filename: true,
       unique_filename: false,
       quality: "100",
-      format: "webp",
+      format: "jpg",
       timeout: 60000,
     }
   );
@@ -176,7 +176,7 @@ const updateImageInCloudinary = async (
       use_filename: true,
       unique_filename: false,
       quality: "100",
-      format: "webp",
+      format: "jpg",
     }
   );
 
