@@ -26,13 +26,7 @@ const page = async () => {
     "user-profile"
   );
 
-  if (!user) {
-    return (
-      <div className="flex h-dvh items-center justify-center">
-        <p className="text-lg font-semibold">Unauthorized</p>
-      </div>
-    );
-  }
+
 
   return (
     <>

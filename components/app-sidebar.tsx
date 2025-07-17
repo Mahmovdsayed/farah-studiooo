@@ -52,7 +52,7 @@ const data = {
     },
     {
       title: "Services",
-      url: "#",
+      url: "/dashboard/services",
       icon: IconListDetails,
     },
     {
@@ -155,7 +155,7 @@ interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
 export function AppSidebar({ user, ...props }: AppSidebarProps) {
   const path = usePathname();
   return (
-    <Sidebar  collapsible="offcanvas" {...props}>
+    <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>

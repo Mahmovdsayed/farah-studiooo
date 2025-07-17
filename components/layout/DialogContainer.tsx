@@ -19,6 +19,7 @@ interface IProps {
     mainButtonTitle?: string;
     mainButtonIcon?: React.ReactNode;
     mainButtonClassName?: string;
+    variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
 }
 const DialogContainer = ({
     children,
@@ -29,16 +30,17 @@ const DialogContainer = ({
     mainButtonTitle,
     mainButtonClassName,
     mainButtonIcon
+    , variant = "default"
 }: IProps) => {
 
     return <>
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button type="button" variant="default" className={mainButtonClassName}>{mainButtonIcon} {mainButtonTitle}</Button>
+                <Button type="button" variant={variant} className={mainButtonClassName}>{mainButtonIcon} {mainButtonTitle}</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader className="text-start">
-                    <DialogTitle>{title}</DialogTitle>
+                    <DialogTitle className="text-wrap">{title}</DialogTitle>
                     <DialogDescription>
                         {description}
                     </DialogDescription>

@@ -68,7 +68,6 @@ const ProfileImageForm = ({ avatar }: IProps) => {
                 {state.message && (
                     <div className="w-full">
                         <Alert className="bg-accent text-accent-foreground" variant={state.success ? "default" : "destructive"}>
-                            <AlertCircleIcon />
                             <AlertTitle>
                                 {state.success ? "Profile picture updated successfully" : "Profile picture update failed"}
                             </AlertTitle>

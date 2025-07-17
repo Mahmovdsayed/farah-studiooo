@@ -64,7 +64,6 @@ const SignInForm = () => {
           />
           {state.message && (
             <Alert variant={state.success ? "default" : "destructive"}>
-              <AlertCircleIcon />
               <AlertTitle>
                 {state.success ? "Signed in successfully" : "Sign-in failed"}
               </AlertTitle>

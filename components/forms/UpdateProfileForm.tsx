@@ -212,7 +212,6 @@ const UpdateProfileForm = ({ user }: IProps) => {
                 state.message && (
                     <div className="w-full">
                         <Alert className="bg-accent text-accent-foreground" variant={state.success ? "default" : "destructive"}>
-                            <AlertCircleIcon />
                             <AlertTitle>
                                 {state.success ? "Profile updated successfully" : "Profile update failed"}
                             </AlertTitle>
