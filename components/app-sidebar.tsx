@@ -62,7 +62,7 @@ const data = {
     },
     {
       title: "Education",
-      url: "#",
+      url: "/dashboard/education",
       icon: IconCake,
     },
     { title: "Skills", url: "#", icon: IconStackFilled },

@@ -10,7 +10,7 @@ interface IProps {
 
 const ManageProfile = ({ user }: IProps) => {
     return <>
-        <Card className="mt-4 py-4 px-0">
+        <Card className="mt-4  px-0">
 
             {/* Profile Picture & userName and Email */}
             <CardContent>

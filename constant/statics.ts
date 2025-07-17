@@ -3,6 +3,7 @@ export const allowedImageTypes = [
   "image/jpeg",
   "image/jpg",
   "image/gif",
+  "image/webp",
 ];
 
 export const baseURL = "http://localhost:3000";

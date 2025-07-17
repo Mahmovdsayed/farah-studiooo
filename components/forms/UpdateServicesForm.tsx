@@ -14,7 +14,7 @@ import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 
 
 interface IProps {
-    services: servicesTypes
+    services: servicesTypes;
     id: string
 }
 const UpdateServicesForm = ({ services, id }: IProps) => {
@@ -44,7 +44,7 @@ const UpdateServicesForm = ({ services, id }: IProps) => {
             setOpen={setopen}
             title={`Update Service: ${services.title}`}
             description={"This will update your service."}
-            mainButtonClassName="w-1/2"
+            mainButtonClassName="w-full"
             mainButtonIcon={<Edit />}
             mainButtonTitle="Edit"
             variant="outline"

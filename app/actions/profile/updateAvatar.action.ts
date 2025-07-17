@@ -47,7 +47,6 @@ export async function updateAvatar(
 
     return successResponse("Avatar updated successfully");
   } catch (error) {
-    console.log(error);
     return errResponse("Something went wrong");
   }
 }

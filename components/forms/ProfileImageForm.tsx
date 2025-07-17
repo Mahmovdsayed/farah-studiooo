@@ -47,6 +47,8 @@ const ProfileImageForm = ({ avatar }: IProps) => {
                         <div className="w-full flex items-center justify-center">
                             <img
                                 src={avatar?.url}
+                                width={400}
+                                height={400}
                                 alt="avatar"
                                 className=" rounded-xl object-cover"
                             />
