@@ -17,13 +17,11 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   width: "device-width",
+  height: "device-height",
   initialScale: 1,
+  viewportFit: "cover",
   maximumScale: 1,
   userScalable: false,
-  // themeColor: [
-  //   { media: "(prefers-color-scheme: light)", color: "white" },
-  //   { media: "(prefers-color-scheme: dark)", color: "black" },
-  // ],
 };
 
 export default function RootLayout({
@@ -32,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html suppressHydrationWarning dir="ltr" className="light" lang="en">
+    <html suppressHydrationWarning dir="ltr" className="dark" lang="en">
       <body
         className={`${GetLexendDeca.variable} overflow-x-hidden  antialiased`}
       >

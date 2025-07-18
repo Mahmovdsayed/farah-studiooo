@@ -16,9 +16,12 @@ export async function updateAvatar(
   formData: FormData
 ): Promise<ActionState> {
   try {
-    await connectToDatabase();
-    const user = await authorizeUser();
-    if (!user || "error" in user) return user;
+   const [dbConnection, user] = await Promise.all([
+    connectToDatabase(),
+    authorizeUser(),
+  ]);
+
+  if (!user || "error" in user) return user;
 
     const avatar = formData.get("avatar") as File;
     if (!avatar) return errResponse("Avatar is required");

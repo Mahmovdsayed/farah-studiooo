@@ -12,8 +12,11 @@ export async function updateProfile(
   formData: FormData
 ): Promise<ActionState> {
   try {
-    await connectToDatabase();
-    const user = await authorizeUser();
+    const [dbConnection, user] = await Promise.all([
+      connectToDatabase(),
+      authorizeUser(),
+    ]);
+
     if (!user || "error" in user) return user;
 
     const data = {

@@ -17,9 +17,12 @@ export async function addEducation(
   formData: FormData
 ): Promise<ActionState> {
   try {
-    await connectToDatabase();
-    const user = await authorizeUser();
-    if (!user || "error" in user) return user;
+    const [dbConnection, user] = await Promise.all([
+    connectToDatabase(),
+    authorizeUser(),
+  ]);
+
+  if (!user || "error" in user) return user;
 
     const educationCount = await Education.countDocuments({
       userID: user.id,

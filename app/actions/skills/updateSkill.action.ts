@@ -2,12 +2,12 @@
 
 import { authorizeUser, errResponse, successResponse } from "@/Helpers/helpers";
 import { connectToDatabase } from "@/lib/connectToDatabase";
-import Service from "@/models/services.model";
+import Skills from "@/models/skills.model";
 import { ActionState } from "@/types/action.types";
-import { servicesValidation } from "@/validations/services.validation";
+import { skillsValidationSchema } from "@/validations/skills.validation";
 import { revalidateTag } from "next/cache";
 
-export async function updateService(
+export async function updateSkill(
   _state: ActionState,
   formData: FormData,
   id: string
@@ -17,32 +17,32 @@ export async function updateService(
       connectToDatabase(),
       authorizeUser(),
     ]);
-
     if (!user || "error" in user) return user;
-
     if (!id) return errResponse("ID is required");
 
-    const services = await Service.findById(id);
-    if (!services) return errResponse("Service not found");
+    const skill = await Skills.findById(id);
+    if (!skill) return errResponse("Skill not found");
 
-    if (services.userID.toString() !== user.id)
-      return errResponse("You are not authorized to update this service");
+    if (skill.userID.toString() !== user.id)
+      return errResponse("You are not authorized to update this skill");
 
     const data = {
-      title: formData.get("title") || "",
-      description: formData.get("description") || "",
+      name: formData.get("name") || "",
+      category: formData.get("category") || "",
+      proficiency: formData.get("proficiency") || "",
     };
-    const result = await servicesValidation.safeParseAsync(data);
+
+    const result = await skillsValidationSchema.safeParseAsync(data);
     if (!result.success) {
       return errResponse(result.error.issues[0]?.message || "Invalid input");
     }
 
-    await Service.findByIdAndUpdate(id, data, {
+    await Skills.findByIdAndUpdate(id, data, {
       new: true,
     });
 
-    revalidateTag("services");
-    return successResponse("Service updated successfully");
+    revalidateTag("skills");
+    return successResponse("Skill updated successfully");
   } catch (error) {
     return errResponse("Something went wrong");
   }

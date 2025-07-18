@@ -8,9 +8,12 @@ import { revalidateTag } from "next/cache";
 
 export async function deleteServices(id: string): Promise<ActionState> {
   try {
-    await connectToDatabase();
-    const user = await authorizeUser();
-    if (!user || "error" in user) return user;
+    const [dbConnection, user] = await Promise.all([
+       connectToDatabase(),
+       authorizeUser(),
+     ]);
+   
+     if (!user || "error" in user) return user;
 
     if (!id) return errResponse("ID is required");
     const services = await Service.findById(id);

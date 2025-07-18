@@ -6,19 +6,21 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../ui/select";
-import React, { useActionState, useEffect } from "react";
+import React, { useActionState, useEffect, useRef } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { formatDate, getLocalDateStringg } from "@/functions/formatDate";
 import { Calendar } from "../ui/calendar";
 import { addEducation } from "@/app/actions/education/addEducation.action";
 import { toast } from "sonner";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
+import SubmitButton from "../SubmitButton";
 
 const AddNewEducationForm = () => {
     const [open, setOpen] = React.useState(false)
     const [date, setDate] = React.useState<Date | undefined>(undefined)
     const [openEndDate, setOpenEndDate] = React.useState(false)
     const [endDate, setEndDate] = React.useState<Date | undefined>(undefined)
+    const formRef = useRef<HTMLFormElement>(null);
 
     const [state, formAction, isPending] = useActionState(
         addEducation,
@@ -35,23 +37,32 @@ const AddNewEducationForm = () => {
     )
 
     useEffect(() => {
-        if (state.success && state.message) {
+        if (!state) return;
+
+        if (state.success) {
             toast.success(state.message, {
                 description: "Your new education has been added.",
                 duration: 3000,
                 position: "top-center",
             });
+            formRef.current?.reset();
+        } else if (state.message) {
+            toast.error(state.message, {
+                duration: 3000,
+                position: "top-center",
+            });
         }
-    }, [state])
+    }, [state]);
 
     return <>
-        <form action={formAction} className="flex flex-col gap-4">
+        <form ref={formRef} action={formAction} className="flex flex-col gap-4">
             <div>
                 <Label htmlFor="schoolName">
                     University Name
                 </Label>
                 <Input
                     name="schoolName"
+                    disabled={isPending}
                     type="text"
                     placeholder="Enter university name"
                     id="schoolName"
@@ -68,6 +79,7 @@ const AddNewEducationForm = () => {
                     placeholder="Enter faculty name"
                     id="faculty"
                     required
+                    disabled={isPending}
                 />
             </div>
             <div>
@@ -79,6 +91,7 @@ const AddNewEducationForm = () => {
                     name="description"
                     placeholder="Type your education description here."
                     id="description"
+                    disabled={isPending}
                     required
                 />
             </div>
@@ -95,6 +108,7 @@ const AddNewEducationForm = () => {
                         step="0.01"
                         placeholder="Enter your GPA"
                         id="gpa"
+                        disabled={isPending}
                         required
                     />
                 </div>
@@ -103,6 +117,7 @@ const AddNewEducationForm = () => {
                         Status
                     </Label>
                     <Select
+                        disabled={isPending}
                         required
                         name="status"
                     >
@@ -127,6 +142,7 @@ const AddNewEducationForm = () => {
                     <Popover open={open} onOpenChange={setOpen}>
                         <PopoverTrigger asChild>
                             <Button
+                                disabled={isPending}
                                 variant="outline"
                                 id="from"
                                 className="w-full justify-between font-normal"
@@ -173,6 +189,7 @@ const AddNewEducationForm = () => {
                         <PopoverTrigger asChild>
                             <Button
                                 variant="outline"
+                                disabled={isPending}
                                 id="to"
                                 className="w-full justify-between font-normal"
                             >
@@ -212,6 +229,7 @@ const AddNewEducationForm = () => {
                     University Image
                 </Label>
                 <Input
+                    disabled={isPending}
                     name="schoolImage"
                     type="file"
                     placeholder="Upload University image"
@@ -219,33 +237,17 @@ const AddNewEducationForm = () => {
                     accept="image/*"
                 />
             </div>
-            {
-                state.message && (
-                    <div className="w-full">
-                        <Alert className="bg-accent text-accent-foreground" variant={state.success ? "default" : "destructive"}>
-                            <AlertTitle>
-                                {state.success ? "Education added successfully" : "Failed to add education"}
-                            </AlertTitle>
-                            <AlertDescription>
-                                <p>
-                                    {state.success
-                                        ? "Your new education has been added."
-                                        : state.message}
-                                </p>
-                            </AlertDescription>
-                        </Alert>
-
-                    </div>
-                )}
+            {state?.message && !state.success && (
+                <Alert variant="destructive">
+                    <AlertTitle>Error</AlertTitle>
+                    <AlertDescription>
+                        {state.message}
+                    </AlertDescription>
+                </Alert>
+            )}
 
             <div className="w-full flex flex-col items-center gap-2 md:flex-row-reverse md:justify-start md:text-end">
-                <Button
-                    type="submit"
-                    disabled={isPending}
-                    className="w-full md:w-fit"
-                >
-                    <Save /> {isPending ? "Saving..." : "Save Education"}
-                </Button>
+                <SubmitButton title="Education" />
             </div>
         </form>
     </>;

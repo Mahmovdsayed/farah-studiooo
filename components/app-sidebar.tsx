@@ -65,7 +65,7 @@ const data = {
       url: "/dashboard/education",
       icon: IconCake,
     },
-    { title: "Skills", url: "#", icon: IconStackFilled },
+    { title: "Skills", url: "/dashboard/skills", icon: IconStackFilled },
     {
       title: "Analytics",
       url: "#",

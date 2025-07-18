@@ -12,9 +12,12 @@ import { revalidateTag } from "next/cache";
 
 export async function deleteEducation(id: string) {
   try {
-    await connectToDatabase();
-    const user = await authorizeUser();
-    if (!user || "error" in user) return user;
+    const [dbConnection, user] = await Promise.all([
+    connectToDatabase(),
+    authorizeUser(),
+  ]);
+
+  if (!user || "error" in user) return user;
 
     if (!id) return errResponse("ID is required");
 

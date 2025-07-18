@@ -23,7 +23,7 @@ const ManageProfile = ({ user }: IProps) => {
                         className="rounded-xl object-cover w-24 h-24"
                     />
                     <div className="text-start">
-                        <h3 className="text-base md:text-xl font-semibold">{user.name}</h3>
+                        <h2 className="text-base md:text-xl font-semibold">{user.name}</h2>
                         <p className="text-xs md:text-sm my-1 text-muted-foreground">{user.email}</p>
                         <p className="text-xs md:text-sm text-muted-foreground font-semibold">
                             {user.positionName}

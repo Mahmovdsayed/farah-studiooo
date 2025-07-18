@@ -12,10 +12,13 @@ export async function updateEducation(
   id: string
 ): Promise<ActionState> {
   try {
-    await connectToDatabase();
-    const user = await authorizeUser();
-    if (!user || "error" in user) return user;
+    const [dbConnection, user] = await Promise.all([
+      connectToDatabase(),
+      authorizeUser(),
+    ]);
 
+    if (!user || "error" in user) return user;
+    
     if (!id) return errResponse("ID is required");
 
     const education = await Education.findById(id);

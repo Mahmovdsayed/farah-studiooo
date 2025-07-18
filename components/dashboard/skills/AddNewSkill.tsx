@@ -1,20 +1,20 @@
-import AddNewServicesForm from "@/components/forms/AddNewServicesForm";
+import AddNewSkillForm from "@/components/forms/AddNewSkillForm";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
-const AddNewServices = () => {
+const AddNewSkill = () => {
     return <>
         <Card className="mt-4 px-0">
             <CardHeader className="px-3">
-                <h2 className="text-base md:text-xl font-semibold">Add New Service</h2>
+                <h2 className="text-base md:text-xl font-semibold">Add New Skill</h2>
                 <p className="text-xs md:text-sm font-medium text-muted-foreground md:w-4/6">
-                    Add a new service to your portfolio. You can add a service name, and description.
+                    Add a new skill to your portfolio. You can add a skill name, and description.
                 </p>
             </CardHeader>
             <CardContent className="px-3">
-                <AddNewServicesForm />
+                <AddNewSkillForm />
             </CardContent>
         </Card>
     </>;
 };
 
-export default AddNewServices;
+export default AddNewSkill;
