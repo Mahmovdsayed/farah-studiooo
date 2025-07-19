@@ -2,12 +2,12 @@
 
 import { authorizeUser, errResponse, successResponse } from "@/Helpers/helpers";
 import { connectToDatabase } from "@/lib/connectToDatabase";
-import Skills from "@/models/skills.model";
+import Tools from "@/models/tools.model";
 import { ActionState } from "@/types/action.types";
-import { skillsValidationSchema } from "@/validations/skills.validation";
+import { toolsValidation } from "@/validations/tools.validation";
 import { revalidateTag } from "next/cache";
 
-export async function addSkill(
+export async function addTool(
   _state: ActionState,
   formData: FormData
 ): Promise<ActionState> {
@@ -16,27 +16,25 @@ export async function addSkill(
       connectToDatabase(),
       authorizeUser(),
     ]);
-
     if (!user || "error" in user) return user;
 
     const data = {
       name: formData.get("name") || "",
-      category: formData.get("category") || "",
-      proficiency: formData.get("proficiency") || "",
     };
 
-    const result = await skillsValidationSchema.safeParseAsync(data);
+    const result = await toolsValidation.safeParseAsync(data);
     if (!result.success)
       return errResponse(result.error.issues[0]?.message || "Invalid input");
 
-    await Skills.create({
+    await Tools.create({
       ...data,
       userID: user.id,
     });
 
-    revalidateTag("skills");
-    return successResponse("Skill added successfully");
+    revalidateTag("tools");
+    return successResponse("Tool added successfully");
   } catch (error) {
+    console.log(error);
     return errResponse("Something went wrong");
   }
 }
