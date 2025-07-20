@@ -20,7 +20,7 @@ const ManageServices = ({ services }: IProps) => {
 
                 {
                     services?.map((service: servicesTypes) => (
-                        <Card className="bg-secondary  px-0" key={service._id}>
+                        <Card className="bg-zinc-50 dark:bg-secondary  px-0" key={service._id}>
                             <CardHeader className="px-3">
                                 <h3 className="text-base md:text-xl font-semibold">{service.title}</h3>
                             </CardHeader>

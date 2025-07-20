@@ -18,13 +18,7 @@ export default async function DashboardLayout({
     "/dashboard/user/info",
     "user-info"
   );
-  if (!user) {
-    return (
-      <div className="flex h-dvh items-center justify-center">
-        <p className="text-lg font-semibold">Unauthorized</p>
-      </div>
-    );
-  }
+ 
   return (
     <SidebarProvider
       style={

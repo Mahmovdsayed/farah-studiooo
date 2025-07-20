@@ -18,7 +18,7 @@ const ManageTools = ({ tools }: IProps) => {
             <CardContent className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 px-3">
                 {
                     tools?.map((tool: tools) => (
-                        <Card className="bg-secondary px-0" key={tool._id}>
+                        <Card className="bg-zinc-50 dark:bg-secondary px-0" key={tool._id}>
                             <CardHeader className="px-3">
                                 <h3 className="text-base md:text-xl font-semibold">{tool.name}</h3>
                             </CardHeader>

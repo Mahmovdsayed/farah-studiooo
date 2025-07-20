@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import {
+  IconBriefcase2,
   IconCake,
   IconCamera,
   IconChartBar,
@@ -45,6 +46,11 @@ const data = {
       title: "Manage Profile",
       url: "/dashboard/profile",
       icon: IconUserCircle,
+    },
+    {
+      title: "Work Experience",
+      url: "/dashboard/work",
+      icon: IconBriefcase2,
     },
     {
       title: "Services",

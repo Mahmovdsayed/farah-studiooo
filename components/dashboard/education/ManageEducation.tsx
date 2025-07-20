@@ -19,7 +19,7 @@ const ManageEducation = ({ education }: IProps) => {
             <CardContent className="grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 px-3">
                 {
                     education?.map((education: educationTypes) => (
-                        <Card className="bg-secondary py-4 px-0" key={education._id}>
+                        <Card className="bg-zinc-50 dark:bg-secondary py-4 px-0" key={education._id}>
                             <CardHeader className="px-3">
                                 <div>
                                     <h3 className="text-sm md:text-xl font-semibold">{education.schoolName}</h3>

@@ -1,38 +1,54 @@
 'use client'
-
+import { addWork } from "@/app/actions/work/addWork.action";
+import React, { useActionState, useEffect, useRef } from "react";
+import { toast } from "sonner";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
+import { Textarea } from "../ui/textarea";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Calendar } from "../ui/calendar";
 import { ChevronDownIcon } from "lucide-react";
 import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
-import { Textarea } from "../ui/textarea";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../ui/select";
-import React, { useActionState, useEffect, useRef } from "react";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { formatDate, getLocalDateStringg } from "@/functions/formatDate";
-import { Calendar } from "../ui/calendar";
-import { addEducation } from "@/app/actions/education/addEducation.action";
-import { toast } from "sonner";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../ui/select";
+import { Checkbox } from "../ui/checkbox";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import SubmitButton from "../SubmitButton";
 
-const AddNewEducationForm = () => {
+const AddNewWorkForm = () => {
     const [open, setOpen] = React.useState(false)
     const [date, setDate] = React.useState<Date | undefined>(undefined)
     const [openEndDate, setOpenEndDate] = React.useState(false)
     const [endDate, setEndDate] = React.useState<Date | undefined>(undefined)
     const formRef = useRef<HTMLFormElement>(null);
+    const [current, setCurrent] = React.useState(false);
+
+    const types = [
+        "Full-time",
+        "Part-time",
+        "Contract",
+        "Internship",
+        "Freelance",
+        "Remote",
+        "Temporary",
+        "Casual",
+        "Volunteer",
+        "Self-Employed",
+        "Apprenticeship",
+        "Other",
+    ]
 
     const [state, formAction, isPending] = useActionState(
-        addEducation,
+        addWork,
         {
-            schoolName: "",
-            faculty: "",
+            companyName: "",
+            positionName: "",
             description: "",
-            gpa: 0,
-            status: "Currently Studying",
             from: Date,
             to: Date,
-            schoolImage: File,
+            companyImage: File,
+            current: false,
+            employmentType: "Full-time"
         } as any
     )
 
@@ -41,7 +57,7 @@ const AddNewEducationForm = () => {
 
         if (state.success) {
             toast.success(state.message, {
-                description: "Your new education has been added.",
+                description: "Your new work has been added.",
                 duration: 3000,
                 position: "top-center",
             });
@@ -53,34 +69,31 @@ const AddNewEducationForm = () => {
             });
         }
     }, [state]);
-
     return <>
         <form ref={formRef} action={formAction} className="flex flex-col gap-4">
-            <div>
-                <Label htmlFor="schoolName">
-                    University Name
-                </Label>
-                <Input
-                    name="schoolName"
-                    disabled={isPending}
-                    type="text"
-                    placeholder="Enter university name"
-                    id="schoolName"
-                    required
-                />
-            </div>
-            <div>
-                <Label htmlFor="faculty">
-                    Faculty
-                </Label>
-                <Input
-                    name="faculty"
-                    type="text"
-                    placeholder="Enter faculty name"
-                    id="faculty"
-                    required
-                    disabled={isPending}
-                />
+            <div className="flex items-center justify-between gap-2">
+                <div className="w-full">
+                    <Label htmlFor="companyName">Company Name</Label>
+                    <Input
+                        name="companyName"
+                        disabled={isPending}
+                        type="text"
+                        placeholder="Enter company name"
+                        id="companyName"
+                        required
+                    />
+                </div>
+                <div className="w-full">
+                    <Label htmlFor="positionName">Position Name</Label>
+                    <Input
+                        name="positionName"
+                        disabled={isPending}
+                        type="text"
+                        placeholder="Enter position name"
+                        id="positionName"
+                        required
+                    />
+                </div>
             </div>
             <div>
                 <Label htmlFor="description">
@@ -94,45 +107,6 @@ const AddNewEducationForm = () => {
                     disabled={isPending}
                     required
                 />
-            </div>
-            <div className="flex items-center justify-between gap-2">
-                <div className="w-full">
-                    <Label htmlFor="gpa">
-                        GPA
-                    </Label>
-                    <Input
-                        name="gpa"
-                        type="number"
-                        min="0"
-                        max="4"
-                        step="0.01"
-                        placeholder="Enter your GPA"
-                        id="gpa"
-                        disabled={isPending}
-                        required
-                    />
-                </div>
-                <div className="w-full">
-                    <Label htmlFor="status">
-                        Status
-                    </Label>
-                    <Select
-                        disabled={isPending}
-                        required
-                        name="status"
-                    >
-                        <SelectTrigger className="w-full">
-                            <SelectValue placeholder="Select a status" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectGroup>
-                                <SelectLabel>Education Status</SelectLabel>
-                                <SelectItem value="Currently Studying">Currently Studying</SelectItem>
-                                <SelectItem value="Graduated">Graduated</SelectItem>
-                            </SelectGroup>
-                        </SelectContent>
-                    </Select>
-                </div>
             </div>
             <div className="flex items-center justify-between gap-2">
                 <div className="w-full">
@@ -189,7 +163,7 @@ const AddNewEducationForm = () => {
                         <PopoverTrigger asChild>
                             <Button
                                 variant="outline"
-                                disabled={isPending}
+                                disabled={current || isPending}
                                 id="to"
                                 className="w-full justify-between font-normal"
                             >
@@ -212,6 +186,7 @@ const AddNewEducationForm = () => {
                     </Popover>
                     <Input
                         type="date"
+                        disabled={current || isPending}
                         required
                         id="to"
                         className="hidden"
@@ -224,16 +199,50 @@ const AddNewEducationForm = () => {
                     />
                 </div>
             </div>
+            <div className="w-full">
+                <Label htmlFor="employmentType">
+                    Employment Type
+                </Label>
+                <Select
+                    disabled={isPending}
+                    required
+                    name="employmentType"
+                >
+                    <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Select Employment Type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectGroup>
+                            <SelectLabel>Employment Type</SelectLabel>
+                            {types.map((ty: string, index: number) =>
+                                <SelectItem key={index} value={ty}>{ty}</SelectItem>
+                            )}
+                        </SelectGroup>
+                    </SelectContent>
+                </Select>
+            </div>
+            <div className="w-full">
+                <Label htmlFor="current">Current</Label>
+                <div className="flex items-center gap-3">
+                    <Checkbox
+                        id="current"
+                        checked={current}
+                        onCheckedChange={(val) => setCurrent(Boolean(val))}
+                    />
+                    <Label htmlFor="current">I am currently employed here</Label>
+                </div>
+                <input type="hidden" name="current" value={current.toString()} />
+            </div>
             <div>
-                <Label htmlFor="schoolImage">
-                    University Image
+                <Label htmlFor="companyImage">
+                    Company Image
                 </Label>
                 <Input
                     disabled={isPending}
-                    name="schoolImage"
+                    name="companyImage"
                     type="file"
-                    placeholder="Upload University image"
-                    id="schoolImage"
+                    placeholder="Upload Company image"
+                    id="companyImage"
                     accept="image/*"
                 />
             </div>
@@ -247,10 +256,10 @@ const AddNewEducationForm = () => {
             )}
 
             <div className="w-full flex flex-col items-center gap-2 md:flex-row-reverse md:justify-start md:text-end">
-                <SubmitButton title="Education" />
+                <SubmitButton title="Work Experience" />
             </div>
         </form>
     </>;
 };
 
-export default AddNewEducationForm;
+export default AddNewWorkForm;
