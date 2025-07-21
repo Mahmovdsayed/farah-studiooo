@@ -5,6 +5,7 @@ import { connectToDatabase } from "@/lib/connectToDatabase";
 import Experience from "@/models/experience.model";
 import { ActionState } from "@/types/action.types";
 import { workValidationSchema } from "@/validations/work.validation";
+import { isValidObjectId } from "mongoose";
 import { revalidateTag } from "next/cache";
 
 export async function updateWork(
@@ -13,6 +14,8 @@ export async function updateWork(
   id: string
 ): Promise<ActionState> {
   try {
+    if (!isValidObjectId(id)) return errResponse("Invalid ID");
+
     const [dbConnection, user] = await Promise.all([
       connectToDatabase(),
       authorizeUser(),

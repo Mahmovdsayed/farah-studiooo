@@ -58,6 +58,11 @@ const data = {
       icon: IconListDetails,
     },
     {
+      title: "Clients",
+      url: "/dashboard/clients",
+      icon: IconUsers,
+    },
+    {
       title: "Projects",
       url: "#",
       icon: IconFolder,

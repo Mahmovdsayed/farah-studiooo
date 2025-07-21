@@ -18,7 +18,7 @@ export default async function DashboardLayout({
     "/dashboard/user/info",
     "user-info"
   );
- 
+
   return (
     <SidebarProvider
       style={

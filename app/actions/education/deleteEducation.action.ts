@@ -8,16 +8,19 @@ import {
 } from "@/Helpers/helpers";
 import { connectToDatabase } from "@/lib/connectToDatabase";
 import Education from "@/models/education.model";
+import { isValidObjectId } from "mongoose";
 import { revalidateTag } from "next/cache";
 
 export async function deleteEducation(id: string) {
   try {
-    const [dbConnection, user] = await Promise.all([
-    connectToDatabase(),
-    authorizeUser(),
-  ]);
+    if (!isValidObjectId(id)) return errResponse("Invalid ID");
 
-  if (!user || "error" in user) return user;
+    const [dbConnection, user] = await Promise.all([
+      connectToDatabase(),
+      authorizeUser(),
+    ]);
+
+    if (!user || "error" in user) return user;
 
     if (!id) return errResponse("ID is required");
 

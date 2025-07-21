@@ -4,6 +4,7 @@ import { connectToDatabase } from "@/lib/connectToDatabase";
 import Education from "@/models/education.model";
 import { ActionState } from "@/types/action.types";
 import { educationValidation } from "@/validations/education.validation";
+import { isValidObjectId } from "mongoose";
 import { revalidateTag } from "next/cache";
 
 export async function updateEducation(
@@ -12,13 +13,15 @@ export async function updateEducation(
   id: string
 ): Promise<ActionState> {
   try {
+    if (!isValidObjectId(id)) return errResponse("Invalid ID");
+
     const [dbConnection, user] = await Promise.all([
       connectToDatabase(),
       authorizeUser(),
     ]);
 
     if (!user || "error" in user) return user;
-    
+
     if (!id) return errResponse("ID is required");
 
     const education = await Education.findById(id);

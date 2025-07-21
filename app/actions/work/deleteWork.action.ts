@@ -8,10 +8,13 @@ import {
 } from "@/Helpers/helpers";
 import { connectToDatabase } from "@/lib/connectToDatabase";
 import Experience from "@/models/experience.model";
+import { isValidObjectId } from "mongoose";
 import { revalidateTag } from "next/cache";
 
 export async function deleteWork(id: string) {
   try {
+    if (!isValidObjectId(id)) return errResponse("Invalid ID");
+
     const [dbConnection, user] = await Promise.all([
       connectToDatabase(),
       authorizeUser(),
