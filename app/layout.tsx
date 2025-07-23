@@ -30,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html suppressHydrationWarning dir="ltr" className="light" lang="en">
+    <html suppressHydrationWarning dir="ltr" className="dark" lang="en">
       <body
         className={`${GetLexendDeca.variable} overflow-x-hidden  antialiased`}
       >

@@ -5,6 +5,19 @@ import TextHeader from "@/components/layout/TextHeader";
 import { Separator } from "@/components/ui/separator";
 import { getUserDataDashboard } from "@/lib/fetcher";
 
+export const metadata = {
+    title: "Clients",
+    description: "Here you can manage your clients. You can add, edit, delete, and view clients. You can also assign clients to projects and services.",
+    openGraph: {
+        title: "Clients",
+        description: "Here you can manage your clients. You can add, edit, delete, and view clients. You can also assign clients to projects and services.",
+    },
+    twitter: {
+        title: "Clients",
+        description: "Here you can manage your clients. You can add, edit, delete, and view clients. You can also assign clients to projects and services.",
+    },
+};
+
 const page = async () => {
     const clients = await getUserDataDashboard(
         "/dashboard/clients",

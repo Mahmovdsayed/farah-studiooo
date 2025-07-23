@@ -26,7 +26,7 @@ export async function addClient(
 
     const clientCount = await Client.countDocuments({ userID: user.id });
     if (clientCount >= 15) {
-      return errResponse("You have reached the maximum limit of 10 clients.");
+      return errResponse("You have reached the maximum limit of 15 clients.");
     }
 
     const clientData = {

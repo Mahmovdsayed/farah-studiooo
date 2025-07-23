@@ -13,6 +13,7 @@ export async function updateEducation(
   id: string
 ): Promise<ActionState> {
   try {
+    if (!id) return errResponse("ID is required");
     if (!isValidObjectId(id)) return errResponse("Invalid ID");
 
     const [dbConnection, user] = await Promise.all([
@@ -21,8 +22,6 @@ export async function updateEducation(
     ]);
 
     if (!user || "error" in user) return user;
-
-    if (!id) return errResponse("ID is required");
 
     const education = await Education.findById(id);
     if (!education) return errResponse("Education not found");

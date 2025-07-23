@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import {
+  IconAddressBook,
   IconBriefcase2,
   IconCake,
   IconCamera,
@@ -86,8 +87,8 @@ const data = {
     },
     {
       title: "Contacts",
-      url: "#",
-      icon: IconUsers,
+      url: "/dashboard/contacts",
+      icon: IconAddressBook,
     },
 
     {
