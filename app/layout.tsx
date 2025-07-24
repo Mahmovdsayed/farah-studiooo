@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Manrope } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/providers/Providers";
+import { Analytics } from "@vercel/analytics/react"
 
 const GetLexendDeca = Manrope({
   variable: "--font-geist-sans",
@@ -34,6 +35,8 @@ export default function RootLayout({
       <body
         className={`${GetLexendDeca.variable} overflow-x-hidden  antialiased`}
       >
+        <Analytics />
+
         <Providers>
           {children}
         </Providers>
