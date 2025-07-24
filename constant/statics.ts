@@ -34,7 +34,7 @@ export const allowedImageTypes = [
   "image/webp",
 ];
 
-export const baseURL = "http://localhost:3000";
+export const baseURL = "https://farah-studiooo.vercel.app";
 
 export const allowedPlatformsWithIcons = [
   {
