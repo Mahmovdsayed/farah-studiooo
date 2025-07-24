@@ -59,6 +59,7 @@ const AddNewCourseForm = () => {
                     type="text"
                     placeholder="Enter course title"
                     id="title"
+                    required
                 />
             </div>
             <div>

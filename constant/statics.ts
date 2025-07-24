@@ -33,7 +33,7 @@ export const allowedImageTypes = [
   "image/gif",
   "image/webp",
 ];
-
+// https://farah-studiooo.vercel.app
 export const baseURL = "https://farah-studiooo.vercel.app";
 
 export const allowedPlatformsWithIcons = [
