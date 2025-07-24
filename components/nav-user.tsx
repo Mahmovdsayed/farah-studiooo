@@ -4,6 +4,7 @@ import {
   IconCreditCard,
   IconDotsVertical,
   IconLogout,
+  IconMoon,
   IconNotification,
   IconUserCircle,
 } from "@tabler/icons-react";
@@ -25,10 +26,20 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { User } from "@/types/user.types";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+import { SunIcon } from "lucide-react";
 
 export function NavUser({ user }: { user: User }) {
   const { isMobile } = useSidebar();
+  const [mounted, setMounted] = useState(false)
+  const { theme, setTheme } = useTheme()
 
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) return null
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -77,9 +88,23 @@ export function NavUser({ user }: { user: User }) {
                 <IconUserCircle />
                 Account
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <IconCreditCard />
-                Billing
+              <DropdownMenuItem
+                onSelect={(e) => {
+                  e.preventDefault();
+                  setTheme(theme === "dark" ? "light" : "dark");
+                }}
+              >
+                {theme === "dark" ? (
+                  <>
+                    <SunIcon className=" h-4 w-4" />
+                    Light Mode
+                  </>
+                ) : (
+                  <>
+                    <IconMoon className=" h-4 w-4" />
+                    Dark Mode
+                  </>
+                )}
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <IconNotification />

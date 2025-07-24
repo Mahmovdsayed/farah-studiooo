@@ -5,6 +5,20 @@ import TextHeader from "@/components/layout/TextHeader";
 import { getUserDataDashboard } from "@/lib/fetcher";
 import { Separator } from "@radix-ui/react-separator";
 
+// metaData
+export const metadata = {
+    title: "Courses",
+    description: "Manage your courses, add new ones, update existing ones, and delete those you no longer offer.",
+    openGraph: {
+        title: "Courses",
+        description: "Manage your courses, add new ones, update existing ones, and delete those you no longer offer.",
+    },
+    twitter: {
+        title: "Courses",
+        description: "Manage your courses, add new ones, update existing ones, and delete those you no longer offer.",
+    },
+};
+
 const page = async () => {
     const course = await getUserDataDashboard('/dashboard/courses', 'courses');
     return <>

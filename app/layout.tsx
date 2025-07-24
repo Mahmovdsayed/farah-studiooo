@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "@/components/ui/sonner";
+import { Providers } from "@/providers/Providers";
 
 const GetLexendDeca = Manrope({
   variable: "--font-geist-sans",
@@ -30,12 +30,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html suppressHydrationWarning dir="ltr" className="dark" lang="en">
+    <html suppressHydrationWarning dir="ltr" className="light" lang="en">
       <body
         className={`${GetLexendDeca.variable} overflow-x-hidden  antialiased`}
       >
-        {children}
-        <Toaster richColors position="top-center" />
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );

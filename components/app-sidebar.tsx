@@ -83,17 +83,17 @@ const data = {
     },
     {
       title: "Resume",
-      url: "#",
+      url: "/dashboard/resume",
       icon: IconFileDescription,
     },
     {
       title: "Analytics",
-      url: "#",
+      url: "/dashboard/analytics",
       icon: IconChartBar,
     },
     {
       title: "Tasks",
-      url: "#",
+      url: "/dashboard/tasks",
       icon: IconInnerShadowTop,
     },
     {
