@@ -6,6 +6,7 @@ import {
   IconBriefcase2,
   IconCake,
   IconCamera,
+  IconCertificate,
   IconChartBar,
   IconDashboard,
   IconFileAi,
@@ -75,6 +76,16 @@ const data = {
     },
     { title: "Skills", url: "/dashboard/skills", icon: IconStackFilled },
     { title: "Tools", url: "/dashboard/tools", icon: IconTools },
+    {
+      title: "Courses",
+      url: "/dashboard/courses",
+      icon: IconCertificate,
+    },
+    {
+      title: "Resume",
+      url: "#",
+      icon: IconFileDescription,
+    },
     {
       title: "Analytics",
       url: "#",

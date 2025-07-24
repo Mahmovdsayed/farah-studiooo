@@ -89,7 +89,7 @@ const AddNewEducationForm = () => {
                 <Textarea
                     rows={5}
                     name="description"
-                    placeholder="Type your education description here."
+                    placeholder="your education description here."
                     id="description"
                     disabled={isPending}
                     required

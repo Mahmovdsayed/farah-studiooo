@@ -131,95 +131,26 @@ const UpdateWorkForm = ({ work, id }: IProps) => {
                 <div className="flex items-center justify-between gap-2">
                     <div className="w-full">
                         <Label htmlFor="from">Start Date</Label>
-                        <Popover open={Open} onOpenChange={setOpen}>
-                            <PopoverTrigger asChild>
-                                <Button
-                                    variant="outline"
-                                    id="from"
-                                    className="w-full justify-between font-normal"
-                                    type="button"
-                                >
-                                    {dateFrom
-                                        ? formatDate(dateFrom)
-                                        : work.from
-                                            ? formatDate(work.from)
-                                            : "Select date"}
-                                    <ChevronDownIcon />
-                                </Button>
-                            </PopoverTrigger>
-                            <PopoverContent className="w-auto overflow-hidden p-0" align="start">
-                                <Calendar
-                                    mode="single"
-                                    selected={dateFrom || (work.from ? new Date(work.from) : undefined)}
-                                    captionLayout="dropdown"
-                                    onSelect={(selectedDate: Date | undefined) => {
-                                        if (selectedDate) {
-                                            setDateFrom(selectedDate);
-                                            setOpen(false);
-                                        }
-                                    }}
-                                />
-                            </PopoverContent>
-                        </Popover>
                         <Input
                             type="date"
                             id="from"
-                            className="hidden"
                             name="from"
                             defaultValue={
-                                dateFrom
-                                    ? getLocalDateStringg(dateFrom)
-                                    : work.from
-                                        ? getLocalDateStringg(new Date(work.from))
-                                        : ""
+                                work.from ? getLocalDateStringg(new Date(work.from)) : ""
                             }
+                            required
+                            disabled={isPending}
                         />
                     </div>
                     <div className="w-full">
                         <Label htmlFor="to">End Date</Label>
-                        <Popover open={To} onOpenChange={setTo}>
-                            <PopoverTrigger asChild>
-                                <Button
-                                    variant="outline"
-                                    id="to"
-                                    disabled={currentt || isPending}
-                                    className="w-full justify-between font-normal"
-                                    type="button"
-                                >
-                                    {dateTo
-                                        ? formatDate(dateTo)
-                                        : work.to
-                                            ? formatDate(work.to)
-                                            : "Select date"}
-                                    <ChevronDownIcon />
-                                </Button>
-                            </PopoverTrigger>
-                            <PopoverContent className="w-auto overflow-hidden p-0" align="start">
-                                <Calendar
-                                    mode="single"
-                                    selected={dateTo || (work.to ? new Date(work.to) : undefined)}
-                                    captionLayout="dropdown"
-                                    onSelect={(selectedDate: Date | undefined) => {
-                                        if (selectedDate) {
-                                            setDateTo(selectedDate);
-                                            setTo(false);
-                                        }
-                                    }}
-                                />
-                            </PopoverContent>
-                        </Popover>
                         <Input
                             type="date"
                             id="to"
-                            className="hidden"
                             name="to"
-                            defaultValue={
-                                dateTo
-                                    ? getLocalDateStringg(dateTo)
-                                    : work.to
-                                        ? getLocalDateStringg(new Date(work.to))
-                                        : ""
-                            }
+                            defaultValue={work.to ? getLocalDateStringg(new Date(work.to)) : ""}
+                            required
+                            disabled={isPending}
                         />
                     </div>
                 </div>
