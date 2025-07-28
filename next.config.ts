@@ -18,6 +18,7 @@ const nextConfig: NextConfig = {
   },
   output: "standalone",
   experimental: {
+    cpus: 10,
     scrollRestoration: true,
     optimizeCss: true,
     optimizeServerReact: true,
@@ -26,6 +27,7 @@ const nextConfig: NextConfig = {
     serverActions: {
       allowedOrigins: [
         "https://farah-studio.vercel.app",
+        "https://farah-studiooo.vercel.app",
         "http://localhost:3000",
       ],
       bodySizeLimit: "10mb",

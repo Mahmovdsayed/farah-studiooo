@@ -33,8 +33,11 @@ const page = async () => {
         <Separator className="mb-4" />
         <AddNewTool />
         <Separator className="my-4" />
-        <ManageTools tools={tools?.tools} />
-
+        {tools?.toolsCount === 0 ? (
+            <p className="text-sm text-muted-foreground text-center">{tools?.message}</p>
+        ) :
+            <ManageTools tools={tools?.tools} />
+        })
     </>
 }
 export default page;

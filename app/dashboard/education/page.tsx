@@ -33,7 +33,14 @@ const page = async () => {
         <Separator className="mb-4" />
         <AddNewEducation />
         <Separator className="my-4" />
-        <ManageEducation education={education?.education} />
+        {education?.educationCount === 0 ? (
+            <p className="text-sm text-muted-foreground text-center">
+                {education?.message}
+
+            </p>
+        ) : (
+            <ManageEducation education={education?.education} />
+        )}
     </>;
 };
 

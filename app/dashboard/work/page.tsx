@@ -34,7 +34,11 @@ const page = async () => {
         <Separator className="mb-4" />
         <AddNewWork />
         <Separator className="my-4" />
-        <ManageWork works={works?.works} />
+        {works?.worksCount === 0 ? (
+            <p className="text-sm text-muted-foreground text-center">{works?.message}</p>
+        ) :
+            <ManageWork works={works?.works} />
+        })
     </>
 }
 

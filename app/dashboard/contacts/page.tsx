@@ -30,7 +30,13 @@ const page = async () => {
         <Separator className="mb-4" />
         <AddNewContact />
         <Separator className="my-4" />
-        <ManageContacts contacts={contact?.contacts} />
+        {contact?.contactCount === 0 ? (
+            <p className="text-sm text-muted-foreground text-center">
+                {contact?.message}
+            </p>
+        ) : (
+            <ManageContacts contacts={contact?.contacts} />
+        )}
     </>
 }
 export default page;

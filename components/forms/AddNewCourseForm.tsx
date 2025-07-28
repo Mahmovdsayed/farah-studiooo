@@ -94,7 +94,6 @@ const AddNewCourseForm = () => {
                         <Calendar
                             mode="single"
                             selected={date}
-
                             id="date"
                             captionLayout="dropdown"
                             onSelect={(selectedDate: Date | undefined) => {
@@ -124,6 +123,7 @@ const AddNewCourseForm = () => {
                     Certificate URL
                 </Label>
                 <Input
+                    required
                     type="url"
                     id="certificateURL"
                     name="certificateURL"

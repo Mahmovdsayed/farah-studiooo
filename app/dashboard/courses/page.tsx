@@ -31,7 +31,13 @@ const page = async () => {
         <Separator className="mb-4" />
         <AddNewCourse />
         <Separator className="my-4" />
-        <ManageCourses courses={course?.course} />
+        {course?.courseCount === 0 ? (
+            <p className="text-sm text-muted-foreground text-center">
+                {course?.message}
+            </p>
+        ) : (
+            <ManageCourses courses={course.course} />
+        )}
     </>
 }
 

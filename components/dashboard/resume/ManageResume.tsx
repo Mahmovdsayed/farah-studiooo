@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Resume } from "@/types/resume.types";
 import Link from "next/link";
@@ -21,7 +22,7 @@ const ManageResume = ({ resume }: IProps) => {
                 <Card className="bg-zinc-50 dark:bg-secondary px-0" key={resume?._id}>
                     <CardHeader className="px-3">
                         <h3 className="text-base md:text-xl font-semibold">{resume?.title}</h3>
-                        <Link href={resume?.resumeURL} target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-wrap text-blue-600">{resume?.resumeURL}</Link>
+                        <Link href={String(resume?.resumeURL)} target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-wrap text-blue-600">{resume?.resumeURL}</Link>
                     </CardHeader>
                     <CardFooter className="flex-col items-center justify-between gap-2 px-3 w-full">
                         <UpdateResumeForm resume={resume} id={resume?._id} />

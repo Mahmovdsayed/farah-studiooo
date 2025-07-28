@@ -20,8 +20,8 @@ const UpdateResumeForm = ({ id, resume }: IProps) => {
     const [state, formAction, isPending] = useActionState(
         (state: any, formData: FormData) => updateResume(state, formData, id),
         {
-            title: resume.title || "",
-            resumeURL: resume.resumeURL || "",
+            title: resume?.title || "",
+            resumeURL: resume?.resumeURL || "",
         } as any
     );
 
@@ -64,7 +64,7 @@ const UpdateResumeForm = ({ id, resume }: IProps) => {
                         placeholder="Enter course title"
                         id="title"
                         required
-                        defaultValue={resume.title}
+                        defaultValue={resume?.title}
                     />
                 </div>
                 <div>
@@ -78,7 +78,7 @@ const UpdateResumeForm = ({ id, resume }: IProps) => {
                         placeholder="Enter your resume URL"
                         id="resumeURL"
                         required
-                        defaultValue={resume.resumeURL}
+                        defaultValue={resume?.resumeURL}
                     />
                 </div>
 

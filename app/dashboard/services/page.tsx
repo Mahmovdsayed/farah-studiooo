@@ -36,7 +36,13 @@ const page = async () => {
         <Separator className="mb-4" />
         <AddNewServices />
         <Separator className="my-4" />
-        <ManageServices services={services?.services} />
+        {services?.servicesCount === 0 ? (
+            <p className="text-sm text-muted-foreground text-center">
+                {services?.message}
+            </p>
+        ) : (
+            <ManageServices services={services?.services} />
+        )}
     </>;
 };
 

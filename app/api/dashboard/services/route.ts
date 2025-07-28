@@ -19,7 +19,6 @@ export async function GET() {
         data: {
           message:
             "No services found for this user , please add some services to your account",
-          services: [],
           servicesCount: 0,
         },
       });

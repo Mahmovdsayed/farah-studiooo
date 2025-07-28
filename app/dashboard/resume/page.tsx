@@ -5,7 +5,6 @@ import TextHeader from "@/components/layout/TextHeader";
 import { Separator } from "@/components/ui/separator";
 import { getUserDataDashboard } from "@/lib/fetcher";
 
-// metaData 
 export const metadata = {
     title: "Resume",
     description: "Manage your resume, add new sections, update existing ones, and delete those you no longer need.",
@@ -32,12 +31,12 @@ const page = async () => {
 
         <AddNewResume />
         <Separator className="my-4" />
-        {resume?.resume ? (
-            <ManageResume resume={resume.resume} />
-        ) : (
+        {resume?.resumeCount === 0 ? (
             <p className="text-sm text-muted-foreground text-center">
-                You have not added any resume yet. Please add a new resume to manage it.
+                {resume?.message}
             </p>
+        ) : (
+            <ManageResume resume={resume?.resume} />
         )}
     </>;
 };

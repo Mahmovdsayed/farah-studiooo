@@ -33,7 +33,13 @@ const page = async () => {
         <Separator className="mb-4" />
         <AddNewClient />
         <Separator className="my-4" />
-        <ManageClients clients={clients?.clients} />
+        {clients?.clientCount === 0 ? (
+            <p className="text-sm text-muted-foreground text-center">
+                {clients?.message}
+            </p>
+        ) : (
+            <ManageClients clients={clients?.clients} />
+        )}
     </>
 }
 

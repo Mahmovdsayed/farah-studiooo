@@ -36,7 +36,11 @@ const page = async () => {
         <Separator className="mb-4" />
         <AddNewSkill />
         <Separator className="my-4" />
-        <ManageSkills skills={skills?.skills} />
+        {skills?.skillsCount === 0 ? (
+            <p className="text-sm text-muted-foreground text-center">{skills?.message}</p>
+        ) :
+            <ManageSkills skills={skills?.skills} />
+        })
     </>;
 };
 

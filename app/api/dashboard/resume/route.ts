@@ -11,12 +11,18 @@ export async function GET() {
       return NextResponse.json({ success: false, message: "Unauthorized" });
 
     const resume = await Resume.findOne({ userID: user.id });
-    if (!resume)
+    const resumeCount = await Resume.countDocuments({ userID: user.id });
+
+    if (!resume || resumeCount === 0)
       return NextResponse.json({
         success: false,
-        message: "No resume found for this user",
+        data: {
+          message:
+            "No resume found for this user, please add your resume to your account",
+          resumeCount,
+        },
       });
-      
+
     return NextResponse.json({
       success: true,
       data: { resume },
