@@ -27,8 +27,10 @@ export const viewport: Viewport = {
 
 export default function RootLayout({
   children,
+  // modal
 }: Readonly<{
   children: React.ReactNode;
+  // modal: React.ReactNode
 }>) {
   return (
     <html suppressHydrationWarning dir="ltr" className="light" lang="en">
@@ -39,6 +41,7 @@ export default function RootLayout({
 
         <Providers>
           {children}
+          {/* {modal} */}
         </Providers>
       </body>
     </html>

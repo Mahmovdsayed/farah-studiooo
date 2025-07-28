@@ -65,7 +65,7 @@ const AddNewContactForm = () => {
                 <Label htmlFor="url">URL</Label>
                 <Input
                     name="url"
-                    type="url"
+                    type="text"
                     placeholder="Enter URL"
                     id="url"
                     disabled={isPending}

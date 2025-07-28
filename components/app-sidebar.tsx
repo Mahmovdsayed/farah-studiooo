@@ -18,6 +18,7 @@ import {
   IconNotification,
   IconSettings,
   IconStackFilled,
+  IconStar,
   IconTools,
   IconUserCircle,
   IconUsers,
@@ -103,9 +104,9 @@ const data = {
     },
 
     {
-      title: "Notifications",
-      url: "#",
-      icon: IconNotification,
+      title: "Testimonials",
+      url: "/dashboard/testimonials",
+      icon: IconStar,
     },
     {
       title: "Messages",
