@@ -29,6 +29,7 @@ import { User } from "@/types/user.types";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { SunIcon } from "lucide-react";
+import { LogoutFunc } from "@/Helpers/helpers";
 
 export function NavUser({ user }: { user: User }) {
   const { isMobile } = useSidebar();
@@ -112,7 +113,9 @@ export function NavUser({ user }: { user: User }) {
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={LogoutFunc}
+            >
               <IconLogout />
               Log out
             </DropdownMenuItem>
