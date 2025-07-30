@@ -15,7 +15,9 @@ import { usePathname, useRouter } from "next/navigation";
 
 export function NavMain({
   items,
+  navTitle
 }: {
+  navTitle?: string;
   items: {
     title: string;
     url: string;
@@ -26,7 +28,7 @@ export function NavMain({
   const router = useRouter();
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Main Navigation</SidebarGroupLabel>
+      <SidebarGroupLabel>{navTitle}</SidebarGroupLabel>
       <SidebarGroupContent className="flex flex-col gap-2">
         <SidebarMenu>
           {items.map((item) => (

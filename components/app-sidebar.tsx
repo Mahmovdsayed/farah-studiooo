@@ -17,6 +17,7 @@ import {
   IconListDetails,
   IconMail,
   IconNotification,
+  IconRobotFace,
   IconSettings,
   IconStackFilled,
   IconStar,
@@ -120,55 +121,47 @@ const data = {
       icon: IconSettings,
     },
   ],
-  navClouds: [
-    {
-      title: "Capture",
-      icon: IconCamera,
-      isActive: true,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Proposal",
-      icon: IconFileDescription,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Prompts",
-      icon: IconFileAi,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-  ],
 };
+
+const aiData = {
+  navMain: [
+    {
+      title: "Generate Content",
+      url: "/dashboard/generate-content",
+      icon: IconRobotFace,
+    },
+    {
+      title: "Generate Images",
+      url: "/dashboard/generate-images",
+      icon: IconCamera,
+    },
+    {
+      title: "Generate Keywords",
+      url: "/dashboard/generate-keywords",
+      icon: IconFileAi,
+    },
+  ]
+}
+
+const marketingData = {
+  navMain: [
+    {
+      title: "AI Marketing Chat Agent",
+      url: "/dashboard/marketing-plan",
+      icon: IconExternalLink,
+    },
+    {
+      title: "Content Calendar Generator",
+      url: "/dashboard/content-calendar",
+      icon: IconExternalLink,
+    },
+    {
+      title: "Social Media Post Generator",
+      url: "/dashboard/social-media-posts",
+      icon: IconExternalLink,
+    }
+  ]
+}
 
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
   user: User;
@@ -185,14 +178,16 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
               asChild
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
-              <span className="text-base font-semibold">Farah Studio</span>
+              <span className="text-base font-semibold">Studio</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
 
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        <NavMain navTitle="Main Navigation" items={data.navMain} />
+        <NavMain navTitle="Ai Assistant" items={aiData.navMain} />
+        <NavMain navTitle="Marketing Assistant" items={marketingData.navMain} />
       </SidebarContent>
 
       <SidebarFooter>
