@@ -100,12 +100,13 @@ export default function Page() {
                         />
                     </div>
                     <div>
-                        <Label>Your Phone (Optional)</Label>
+                        <Label>Your Phone</Label>
                         <Input
                             type="tel"
                             placeholder="Enter your phone number"
                             name="phone"
                             id="phone"
+                            required
                             disabled={isPending}
                         />
                     </div>
