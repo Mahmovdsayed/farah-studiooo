@@ -9,6 +9,7 @@ import {
   IconCertificate,
   IconChartBar,
   IconDashboard,
+  IconExternalLink,
   IconFileAi,
   IconFileDescription,
   IconFolder,
@@ -110,7 +111,7 @@ const data = {
     },
     {
       title: "Messages",
-      url: "#",
+      url: "/dashboard/messages",
       icon: IconMail,
     },
     {

@@ -284,7 +284,7 @@ const compressImage = async (
 };
 
 function formatDate(
-  dateString: string,
+  dateString: any,
   format: "date" | "time-ago" = "date"
 ): string {
   const date = new Date(dateString);

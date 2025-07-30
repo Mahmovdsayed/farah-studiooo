@@ -24,17 +24,19 @@ export async function middleware(req: any) {
   }
 
   if (!token) {
-    return pathname.startsWith("/dashboard")
-      ? NextResponse.redirect(new URL("/auth/signin", req.url))
-      : response;
+    if (pathname.startsWith("/dashboard")) {
+      return NextResponse.redirect(new URL("/auth/signin", req.url));
+    }
+    return response;
   }
 
   const decodedToken = await verifyToken(token);
 
   if (!decodedToken) {
-    return pathname.startsWith("/dashboard")
-      ? NextResponse.redirect(new URL("/auth/signin", req.url))
-      : response;
+    if (pathname.startsWith("/dashboard")) {
+      return NextResponse.redirect(new URL("/auth/signin", req.url));
+    }
+    return response;
   }
 
   if (pathname === "/auth/signin") {

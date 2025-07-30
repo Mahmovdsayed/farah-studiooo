@@ -38,7 +38,7 @@ const page = async () => {
             <p className="text-sm text-muted-foreground text-center">{works?.message}</p>
         ) :
             <ManageWork works={works?.works} />
-        })
+        }
     </>
 }
 
