@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const isProd = process.env.NODE_ENV === "production";
+const isVercel = !!process.env.VERCEL;
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -26,6 +27,7 @@ const nextConfig: NextConfig = {
     optimizeServerReact: true,
     appDocumentPreloading: true,
     serverSourceMaps: false,
+    webpackMemoryOptimizations: true,
     serverActions: {
       allowedOrigins: [
         "https://farah-studio.vercel.app",
@@ -35,11 +37,12 @@ const nextConfig: NextConfig = {
       bodySizeLimit: "10mb",
     },
 
-    ...(isProd && {
-      turbopackMinify: true,
-      turbopackSourceMaps: false,
-      turbopackTreeShaking: true,
-    }),
+    ...(isProd &&
+      isVercel && {
+        turbopackMinify: true,
+        turbopackSourceMaps: false,
+        turbopackTreeShaking: true,
+      }),
   },
 };
 
