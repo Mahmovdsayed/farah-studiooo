@@ -1,11 +1,13 @@
 import type { NextConfig } from "next";
 
+const isProd = process.env.NODE_ENV === "production";
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   devIndicators: false,
   compress: true,
   compiler: {
-    removeConsole: process.env.NODE_ENV === "production",
+    removeConsole: isProd,
   },
   images: {
     remotePatterns: [
@@ -19,7 +21,6 @@ const nextConfig: NextConfig = {
   },
   output: "standalone",
   experimental: {
-    cpus: 10,
     scrollRestoration: true,
     optimizeCss: true,
     optimizeServerReact: true,
@@ -33,9 +34,12 @@ const nextConfig: NextConfig = {
       ],
       bodySizeLimit: "10mb",
     },
-    turbopackMinify: true,
-    turbopackSourceMaps: process.env.NODE_ENV !== "production",
-    turbopackTreeShaking: true,
+
+    ...(isProd && {
+      turbopackMinify: true,
+      turbopackSourceMaps: false,
+      turbopackTreeShaking: true,
+    }),
   },
 };
 

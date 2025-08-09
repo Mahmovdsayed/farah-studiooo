@@ -1,3 +1,4 @@
+import { geminiClient } from "@/ai/geminiClient";
 import { SectionCards } from "@/components/section-cards";
 
 export const metadata = {
@@ -13,6 +14,6 @@ export const metadata = {
   },
 };
 
-export default function page() {
+export default async function page() {
   return <SectionCards />;
 }

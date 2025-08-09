@@ -178,7 +178,7 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
               asChild
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
-              <span className="text-base font-semibold">Studio</span>
+              <span className="text-base font-semibold">Farah Studio</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
